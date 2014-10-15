@@ -58,17 +58,19 @@ function getContent ($url) {
         preg_match_all('/class="locality">(.*?)</', $page, $citta, PREG_PATTERN_ORDER);
         $citta = $citta[1];
 
-        preg_match_all('/class="value">(.*?)</', $page, $tel, PREG_PATTERN_ORDER);
-		//print_r($tel);
+		preg_match_all('/class="value">(.*?)</', $page, $tel, PREG_PATTERN_ORDER);
+	
         $tel = $tel[1];
-        
+        $tel = array_unique($tel);
+           //print_r($tel);   
 		preg_match_all('/class="ums">(.*?)</i', $page, $URL, PREG_PATTERN_ORDER);
 		
 		$URL = $URL[1];        
         
         $j = 0;
+        $dim = count($nomi);
         
-        for ($i=0; $i<count($nomi); $i++)  {
+        for ($i=0; $i<$dim; $i++)  {
             $a = substr($nomi[$i], 14);
             $ind = $URL[$i] .'/contatto?lt=frag'; 
             $email_page = getContent($ind);
@@ -84,11 +86,12 @@ function getContent ($url) {
 									//	print_r($res);
 											//$res = $res[0];
 								//	$tel = $res[0];
-										
-										
-           echo $a . ';  ' . $indirizzo[$i] . ';  ' . $citta[$i]. ';  '. $tel[++$i] ."; "  . '<br />' ; // . $mail 
-								      
-           
+
+		if ($i===0)									
+           echo $a . ';  ' . $indirizzo[$i] . ';  ' . $citta[$i]. ';  '. current($tel) ."; "  . '<br />' ; // . $mail 
+         else
+            echo $a . ';  ' . $indirizzo[$i] . ';  ' . $citta[$i]. ';  '. next($tel) ."; "  . '<br />' ;   
+			
         }   
            
 ?>
