@@ -1,24 +1,23 @@
 <?php
 /*
  * Tale sorgente è distribuito secondo licenza CC BY-NC-SA 4.0: 
- * 			http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+ *  http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
  * 
  * Tu sei libero di:
- *    - condividere — riprodurre, distribuire, comunicare al pubblico, 
- * 		esporre in pubblico, rappresentare, eseguire e recitare 
- * 		questo materiale con qualsiasi mezzo e formato; 
+ *    - condividere,  riprodurre, distribuire, comunicare al pubblico, 
+ * 	esporre in pubblico, rappresentare, eseguire e recitare 
+ * 	questo materiale con qualsiasi mezzo e formato; 
  *    - modificare — remixare, trasformare il materiale e basarti su di 
- * 		esso per le tue opere.
+ * 	esso per le tue opere.
  * 	
  * Il licenziante non può revocare questi diritti fintanto che tu 
  * rispetti i termini della licenza alle seguenti condizioni:
- * 		- devi riconoscere l'autore originario e fornire un link alla 
- * 		  licenza;
- *      - non puoi usare il materiale per scopi commerciali;
- *      - se modifichi, o comunque ti basi su questo materiale devi 
- * 		  distribuire i tuoi elaborati con la stessa licenza.
+ *   - devi riconoscere l'autore originario e fornire un link alla  licenza;
+ *   - non puoi usare il materiale per scopi commerciali;
+ *   - se modifichi, o comunque ti basi su questo materiale devi 
+ *     distribuire i tuoi elaborati con la stessa licenza.
  * 			
- * Autore: Riccardo Monterisi
+ * Autore: Riccardo Monterisi http://riccardomonterisi.altervista.org/
  * */
 ?>
 <?php
@@ -70,7 +69,7 @@ function getContent ($url) {
         
 
         $x = $_POST['n'];
-		$page = getContent($x);
+	$page = getContent($x);
 
         preg_match_all('/<a title=".(.*?) class="_lms /', $page, $nomi, PREG_PATTERN_ORDER);
         $nomi = $nomi[1];
@@ -81,14 +80,14 @@ function getContent ($url) {
         preg_match_all('/class="locality">(.*?)</', $page, $citta, PREG_PATTERN_ORDER);
         $citta = $citta[1];
 
-		preg_match_all('/class="value">(.*?)</', $page, $tel, PREG_PATTERN_ORDER);
+	preg_match_all('/class="value">(.*?)</', $page, $tel, PREG_PATTERN_ORDER);
 	
         $tel = $tel[1];
         $tel = array_unique($tel);
            //print_r($tel);   
-		preg_match_all('/class="ums">(.*?)</i', $page, $URL, PREG_PATTERN_ORDER);
+ 	preg_match_all('/class="ums">(.*?)</i', $page, $URL, PREG_PATTERN_ORDER);
 		
-		$URL = $URL[1];        
+	$URL = $URL[1];        
         
         $j = 0;
         $dim = count($nomi);
@@ -99,21 +98,21 @@ function getContent ($url) {
             $email_page = getContent($ind);
             
            preg_match_all('/\b[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4}\b/i', $email_page, $result, PREG_PATTERN_ORDER);
-										$result = $result[0];
+  	   $result = $result[0];
 										//print_r($result);
 									//	$mail = $result[0];
 										
-										$ur = $URL[$i];
-										$tel_page = getContent($ur);
+    	   $ur = $URL[$i];
+	   $tel_page = getContent($ur);
 									//	preg_match_all('/class="value">(.*?)-|class="value">(.*?)</i', $tel_page, $res, PREG_PATTERN_ORDER);
 									//	print_r($res);
 											//$res = $res[0];
 								//	$tel = $res[0];
 
-		if ($i===0)									
-           echo $a . ';  ' . $indirizzo[$i] . ';  ' . $citta[$i]. ';  '. current($tel) ."; "  . '<br />' ; // . $mail 
-         else
-            echo $a . ';  ' . $indirizzo[$i] . ';  ' . $citta[$i]. ';  '. next($tel) ."; "  . '<br />' ;   
+	   if ($i===0)									
+           	echo $a . ';  ' . $indirizzo[$i] . ';  ' . $citta[$i]. ';  '. current($tel) ."; "  . '<br />' ; // . $mail 
+           else
+                echo $a . ';  ' . $indirizzo[$i] . ';  ' . $citta[$i]. ';  '. next($tel) ."; "  . '<br />' ;   
 			
         }   
            
